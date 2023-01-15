@@ -7,19 +7,19 @@ const serviceHost = process.env.HOST || 'http://localhost:3010'
 const getConfiguration = () => {
   console.log(serviceHost)
   return {
-    name: 'qrcode',
-    label: 'QR Code',
-    description: 'Test application with QR Code',
+    name: 'jupiter',
+    label: 'Jupiter',
+    description: 'Jupiter HoloLens',
     type: 'full',
-    image: `${serviceHost}/img/qr.png`,
+    image: `${serviceHost}/img/Jgrande.png`,
     configuration: {
       activitiesConfiguration: {
         activities: [
           {
             name: 'act1',
-            description: 'Show the QR Code of the selected user',
-            label: 'QR Code Display',
-            image: `${serviceHost}/img/qr.png`,
+            description: 'Generate QR from init parameters',
+            label: 'Generate QR',
+            image: `${serviceHost}/img/Jgrande.png`,
             isPlaylist: false,
             isConfigurable: false,
             type: 'live',
@@ -44,7 +44,7 @@ const getConfiguration = () => {
       subjectConfiguration: {
         isMandatory: false,
         manifest: {
-          id: '/qrcode.subject',
+          id: '/jupiter.subject',
           type: 'object',
           properties: {
             favColor: {
@@ -62,6 +62,10 @@ const getConfiguration = () => {
 
 router.get('/service', async (req, res) => {
   return res.json(getConfiguration())
+})
+
+router.get('/fileToDownload', async (req, res) => {
+  return res.sendStatus(200)
 })
 
 router.get('/healthcheck', async (req, res) => {

@@ -1,14 +1,14 @@
 <template>
     <div v-if="qrValue" style="padding:5%">
-        <VueQrcodeComponent :text="qrValue"></VueQrcodeComponent>
+        <!-- <VueQrcodeComponent :text="qrValue"></VueQrcodeComponent> -->
     </div>
 </template>
 
 <script>
-import VueQrcodeComponent from 'vue-qrcode-component'
+// import VueQrcodeComponent from 'vue-qrcode-component'
 
 export default {
-    components:{VueQrcodeComponent},
+    // components:{VueQrcodeComponent},
     data(){
         return{
             qrValue: null,
