@@ -35,7 +35,7 @@
 
 <script>
 import axios from 'axios'
-import QrCode from '~/components/QrCode.vue';
+import QrCode from '~/components/QrCode.vue'
 import SetUpForm from '~/components/SetUpForm.vue'
 import i3hubMixin from '~/mixins/i3hub.mixin'
 export default {
