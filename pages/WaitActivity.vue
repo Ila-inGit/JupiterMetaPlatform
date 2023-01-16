@@ -7,18 +7,18 @@
         </div>
         <div v-else >
             <h1 style="padding:14px;">Wait....</h1>
-            <!-- <VueJsonCsv class="button btn-default" :data="json_data" name="DATATORETRIVE.csv">Download file csv</VueJsonCsv> -->
+            <VueJsonCsv class="btn btn-default" :data="json_data" name="DATATORETRIVE.csv">Download file csv</VueJsonCsv>
         </div>
 
     </div>
 </template>
 
 <script>
-// import {VueJsonCsv} from 'vue-json-csv'
+import {VueJsonCsv} from 'vue-json-csv'
 
 export default {
     name: "WaitActivityPage",
-    // components:{VueJsonCsv},
+    components:{VueJsonCsv},
     data(){
         return{
             json_data: [
