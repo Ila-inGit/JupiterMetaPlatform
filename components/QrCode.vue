@@ -7,27 +7,41 @@
                 </client-only> 
             </div>
             <div class="column">
-                <h1 style="padding:2%;font-size: large;">If You Scanned the QR code</h1>
-                <h2 style="padding:2%;font-size: large;">Click the button below</h2>
-                <NuxtLink to="/WaitActivity" style="padding:2%;font-size: large; font-weight: bold;">Go to activity page</NuxtLink>
+                <div v-if="!scanned">
+                    <h1 style="padding:2%;font-size: large;">If You Scanned the QR code</h1>
+                    <h2 style="padding:2%;font-size: large;">Click the button below</h2>
+                    <input class="button" type="submit" value="Done" @click="qrScanned">
+                </div>
+                <div v-if="scanned">
+                    <WaitActivity :session-token="token"></WaitActivity>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import WaitActivity from "~/components/WaitActivity.vue"
 
 export default {
+    components:{WaitActivity},
+    props:{
+        sessionToken:{type:String,default:''}
+    },
     data(){
         return{
             qrValue: null,
+            token: this.sessionToken,
+            scanned: false
         }
     },
-    
     methods: {
         updateQr(form) {
             // console.log("the update QR" + form)
             this.qrValue = form
+        },
+        qrScanned(){
+            this.scanned = true;
         }
     },
 }

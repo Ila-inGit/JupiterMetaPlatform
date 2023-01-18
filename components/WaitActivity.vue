@@ -1,7 +1,6 @@
 <template>
     <div style="align-content:center;text-align:center">
         <h1 class="text-xl mt-5" style="font-weight:bold; padding:14px; font-size: xx-large;">Wait for the activity to end</h1>
-        <h2 class="text-xl mt-5" style="font-weight:bold; padding:14px; font-size: x-large;">Hololens will send you a file at the end of the activity</h2>
         <input class="button" type="submit" value="Request File" @click="requestFile">
         <div v-if="isLoaded && submitted">
             <h1 style="padding:14px;">DOWNLOAD THE FILE</h1>
@@ -24,6 +23,9 @@ import {BASEURL, REQUESTFILE} from '~/constants/constants.js'
 export default {
     name: "WaitActivityPage",
     // components:{VueJsonCsv},
+    props:{
+        sessionToken:{type:String,default:''}
+    },
     data(){
         return{
             json_data: [
@@ -41,18 +43,14 @@ export default {
             this.json_data = data
         },
         async requestFile(){
-            if(this.submitted == false){
-                try {
-                    const body = await axios.get(BASEURL+REQUESTFILE)
-                    console.log(body)
-                }
-                catch (e) {
-                    console.log(e)
-                }
-                finally {
-                    this.submitted = true
-                }
+            try {
+                const body = await axios.get(BASEURL+REQUESTFILE, { params:{ sessionToken: this.sessionToken}})
+                console.log(body)
             }
+            catch (e) {
+                console.log(e)
+            }
+            this.submitted = true;                
         }
     },
 }

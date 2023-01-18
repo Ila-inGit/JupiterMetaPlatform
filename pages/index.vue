@@ -18,7 +18,7 @@
         <SetUpForm @form-submitted ='submitForm' ></SetUpForm>
       </div>
       <div>
-        <QrCode ref="child"></QrCode>
+        <QrCode ref="child" :session-token="sessionId"></QrCode>
       </div>
       
     </div>
