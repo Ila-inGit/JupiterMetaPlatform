@@ -1,39 +1,32 @@
 <template>
     <div style="align-content:center;text-align:center">
         <h1 class="text-xl mt-5" style="font-weight:bold; padding:14px; font-size: xx-large;">Wait for the activity to end</h1>
-        <input class="button" type="submit" value="Request File" @click="requestFile">
         <div v-if="isLoaded && submitted">
             <h1 style="padding:14px;">DOWNLOAD THE FILE</h1>
+            <input class="button" type="submit" value="Download File" @click="downloadFile">
         </div>
         <div v-if="!isLoaded && submitted" >
             <h1 style="padding:14px;">THE SESSION IS NOT DONE, WAIT FOR THE FILE TO BE SENT</h1>
-            <!-- <VueJsonCsv class="btn btn-default" :data="json_data" name="DATATORETRIVE.csv">Download file csv</VueJsonCsv> -->
         </div>
-
+        <div v-if="!isLoaded">
+            <input class="button" type="submit" value="Request File" @click="requestFile">
+        </div>
     </div>
 </template>
 
 <script>
-// import {VueJsonCsv} from 'vue-json-csv'
-// import http from 'http'
 import axios from 'axios'
 import {BASEURL, REQUESTFILE} from '~/constants/constants.js'
 
 
 export default {
     name: "WaitActivityPage",
-    // components:{VueJsonCsv},
     props:{
         sessionToken:{type:String,default:''}
     },
     data(){
         return{
-            json_data: [
-                {
-                    name: "Data to retrive",
-                    data: 'bleash'
-                }
-            ],
+            json_data: '',
             isLoaded: false,
             submitted: false,
         }
@@ -44,13 +37,22 @@ export default {
         },
         async requestFile(){
             try {
-                const body = await axios.get(BASEURL+REQUESTFILE, { params:{ sessionToken: this.sessionToken}})
-                console.log(body)
+                const response = await axios.get(BASEURL+REQUESTFILE, { params:{ sessionToken: this.sessionToken}})
+                this.json_data = response.data
+                this.isLoaded = true
             }
             catch (e) {
                 console.log(e)
             }
             this.submitted = true;                
+        },
+        downloadFile(){
+            const csv = 'Put,Data,Of,File\n'
+            const anchor = document.createElement('a')
+            anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv)
+            anchor.target = '_blank'
+            anchor.download = 'dataOfSession.csv'
+            anchor.click()
         }
     },
 }

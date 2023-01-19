@@ -7,10 +7,12 @@
                 </client-only> 
             </div>
             <div class="column">
-                <div v-if="!scanned">
-                    <h1 style="padding:2%;font-size: large;">If You Scanned the QR code</h1>
-                    <h2 style="padding:2%;font-size: large;">Click the button below</h2>
-                    <input class="button" type="submit" value="Done" @click="qrScanned">
+                <div style="align-content:center;text-align:center">
+                    <div v-if="!scanned">
+                        <h1 style="padding:2%;font-size: large;">If You Scanned the QR code</h1>
+                        <h2 style="padding:2%;font-size: large;">Click the button below</h2>
+                        <input class="button" type="submit" value="Done" @click="qrScanned">
+                    </div>
                 </div>
                 <div v-if="scanned">
                     <WaitActivity :session-token="token"></WaitActivity>
