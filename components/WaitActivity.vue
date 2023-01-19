@@ -26,33 +26,35 @@ export default {
     },
     data(){
         return{
-            json_data: '',
+            body_data: '',
             isLoaded: false,
             submitted: false,
         }
     },
     methods:{
-        setDataJson(data){
-            this.json_data = data
-        },
         async requestFile(){
             try {
                 const response = await axios.get(BASEURL+REQUESTFILE, { params:{ sessionToken: this.sessionToken}})
-                this.json_data = response.data
+                this.body_data = response.data
                 this.isLoaded = true
             }
             catch (e) {
-                console.log(e)
+                alert("There was an error in the network")
             }
             this.submitted = true;                
         },
         downloadFile(){
-            const csv = 'Put,Data,Of,File\n'
-            const anchor = document.createElement('a')
-            anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv)
-            anchor.target = '_blank'
-            anchor.download = 'dataOfSession.csv'
-            anchor.click()
+            
+            const csv = this.body_data.body
+            if(csv){
+                const anchor = document.createElement('a')
+                anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv)
+                anchor.target = '_blank'
+                anchor.download = 'dataOfSession.csv'
+                anchor.click()
+            }else{
+                alert('Error downloading file')
+            }
         }
     },
 }
