@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  webapp:
+    image: registry.gitlab.com/i3lab/metaplata/services/jupiter/webapp
+    networks:
+      - net
+    ports:
+      - "3010:3010"
+    environment:
+      HOST: "https://jupiter.i3lab.group"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        reservations:
+          cpus: "0.15"
+          memory: 128M
+      labels:
+        caddy: jupiter.i3lab.group
+        caddy.reverse_proxy: "{{upstreams 3010}}"
+        caddy.tls.ca: "https://acme-v02.api.letsencrypt.org/directory"
+
+networks: 
+  net: 
+    name: caddy_caddy
+    external: true

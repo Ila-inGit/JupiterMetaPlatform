@@ -1,9 +1,9 @@
 <template>
     <div style="align-content:center;text-align:center">
-        <h1 class="text-xl mt-5" style="font-weight:bold; padding:14px; font-size: xx-large;">Wait for the activity to end</h1>
+        <h1 style="font-family: 'Inter', sans-serif; font-weight:bold; padding:14px; font-size: large;">Wait for the activity to end</h1>
         <div v-if="isLoaded && submitted">
             <h1 style="padding:14px;">DOWNLOAD THE FILE</h1>
-            <input class="button" type="submit" value="Download File" @click="downloadFile">
+            <input class="button" type="download" value="⭳ Download File" @click="downloadFile">
         </div>
         <div v-if="!isLoaded && submitted" >
             <h1 style="padding:14px;">THE SESSION IS NOT DONE, WAIT FOR THE FILE TO BE SENT</h1>
@@ -60,17 +60,19 @@ export default {
 }
 </script>
 <style lang="css">
-    input[type=submit]{
+    input[type=download]{
         width: 40%;
-        background-color: #4CAF50;
-        color:white;
+        background-color: white;
+        color:#f47971;
         padding:14px 20px;
-        margin:8px 0;
-        border:none;
+        margin:6px 0;
+        border: black;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 40px;
+        text-align: center;
     }
-    input[type=submit]:hover{
-        background-color: #45A049;
+    input[type=download]:hover{
+        background-color: rgb(222, 221, 221);
     }
 </style>

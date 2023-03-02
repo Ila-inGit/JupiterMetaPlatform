@@ -1,11 +1,10 @@
 <template>
-    <div class="scene-container">
-  <h1 style="font-weight:bold">Scenes Selected:</h1>
+  <div class="scene-list-container">
+  <h1 style="font-family: 'Inter', sans-serif; font-weight:bold; font-size: large; margin-bottom: 8px">Tasks selected till now:</h1>
     <ul class="ul">
-      <li v-for="(scene, index) in scenes" :key="index">
-        {{ scene.name }} with  {{ scene.difficulty }} and  {{ scene.music }}, {{ scene.rhythm }}
-        <br/>
-        <br>
+      <li v-for="(scene, index) in scenes" :key="index" style="margin-bottom: 6px">
+       <p style="font-family: 'Inter', sans-serif; font-weight:bold;">{{ scene.name }} task </p> 
+        {{ scene.difficulty }} difficulty - {{ scene.music }} - {{ scene.rhythm }}
       </li>
     </ul>
   </div>
@@ -22,7 +21,8 @@ export default {
 }
 </script>
 <style lang="css">
+
     .ul{
-      list-style-type: circle;
+      list-style-type: square;
     }
 </style>

@@ -2,6 +2,7 @@ export default {
   ssr: true,
   target: 'server',
   server: {
+    host: "0.0.0.0",
     port: 3010, // default: 3000
   },
   serverMiddleware: [
@@ -11,7 +12,6 @@ export default {
     },
   ],
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

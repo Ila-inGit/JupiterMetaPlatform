@@ -1,0 +1,23 @@
+variables:
+  STACK_NAME: 'jupiter' # CHANGE HERE
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "master"
+
+stages:
+  - build
+
+default:
+  tags:
+    - i3lab # Use i3lab runner
+
+docker_build:
+  image: docker:20
+  stage: build
+  script:
+    - docker login -u $gitlab_runner_username -p $gitlab_runner_token registry.gitlab.com
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+    - docker stack deploy -c docker-compose.yml $STACK_NAME

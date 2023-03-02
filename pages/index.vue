@@ -7,19 +7,50 @@
       </div>
     </div> -->
     <div v-if="selectedUser">
-        <h1 class="text-xl mt-5" style="font-weight:bold; padding:14px; font-size: xx-large;">Fill the form for the session</h1>
+        <header>
+            <div class="header-box">
+                <img class="logo" src="@/assets/LogoJupiter.png">
+                <div v-if="nextPage">
+                    <div class="flex-container">
+                        <input button class="button" type="back" value="←" @click="goToPreviousPage">
+                    </div>
+                    <h1 class="title">SELECT OPTIONS AND GENERATE QR CODE</h1>
+                    <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
+                        <SetUpForm ref="setupform" @form-submitted ='submitForm' ></SetUpForm>
+                    </div>
+                    <div id="column" class="column" style="float:right;width: 50%;padding: 10px;">
+                        <div class="qr-box">
+                        <QrCode ref="child" :session-token="sessionId"></QrCode>
+                    </div></div>
+                </div>
+                
+                <div v-else>
+                    <div class="flex-container">
+                        <input class="button" type="next" value="→" @click="goToNextPage">
+                    </div>
+                    <h1 class="title">CHOOSE ACTIVITY DETAILS</h1>
+                    <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
+                        <div class="scene-container">
+                            <SceneForm ref="sceneform" @scene-submitted="addScene"></SceneForm>
+                        </div> 
+                    </div>
+                    <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
+                        <div class="scene-list-box">
+                            <SceneList v-if="scenes.length" :scenes="scenes"></SceneList>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </header>
+   
+        
         <!-- <div class="mx-auto rounded w-max border-2 border-black px-6 py-4 mt-5">
             <p class="font-bold">User data</p>
             <p>Name: {{ selectedUser.name }}</p>
             <p>Surname: {{ selectedUser.surname }}</p>
         </div> -->
       <!-- <img class="mx-auto" height="50" :src="qrcode" alt="" /> -->
-      <div>
-        <SetUpForm @form-submitted ='submitForm' ></SetUpForm>
-      </div>
-      <div>
-        <QrCode ref="child" :session-token="sessionId"></QrCode>
-      </div>
+     
       
     </div>
     <div v-else class="card text-center mt-5">
@@ -37,10 +68,11 @@
 import axios from 'axios'
 import QrCode from '~/components/QrCode.vue'
 import SetUpForm from '~/components/SetUpForm.vue'
+import SceneForm from '~/components/SceneForm.vue'
 import i3hubMixin from '~/mixins/i3hub.mixin'
 export default {
     name: "IndexPage",
-    components: {QrCode,SetUpForm},
+    components: {SceneForm,QrCode,SetUpForm},
     mixins: [i3hubMixin],
     data() {
         return {
@@ -49,12 +81,14 @@ export default {
             sessionId: "",
             url: "",
             form: "",
+            nextPage: false,
             scenesNames: {
                 type: Array,
             },
             scenesDifficulty: {
                 type: Array,
             },
+            scenes: [],
         };
     },
     async mounted() {
@@ -81,6 +115,20 @@ export default {
         }
     },
     methods: {
+        goToNextPage(nextPage){
+            if (this.scenes.length === 0) {
+                alert('You have to select the tasks for your activity. Please add them before going on.')
+            }else{
+                this.$refs.sceneform.setScenes(this.scenes);
+                this.nextPage = true;
+            }
+        },
+        goToPreviousPage(nextPage){
+            this.nextPage = false;
+        },
+        addScene(scene) {
+            this.scenes.push(scene);
+        },
         submitForm(form) {
             this.scenesNames = [];
             this.scenesDifficulty = [];
@@ -180,3 +228,89 @@ export default {
     },
 }
 </script>
+<style lang="css"> 
+
+    .header-box {
+        width: auto;
+        height: 170px;
+        margin: 10px;
+        padding: 25px;
+        border: transparent;
+        background-color: rgb(222, 222, 222);
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: baseline;
+    } 
+
+    .logo {
+        width: 460px;
+        height: 150px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: 1;
+        position: absolute;
+        top: 22px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    .scene-list-box{
+        width: 800px;
+        border: transparent;
+        margin-left: 110px;
+        margin-top: 12px;
+        height: auto;
+    }
+
+    .qr-box{
+        width: 660px;
+        border: transparent;
+        margin-left: 65px;
+        margin-top: 50px;
+        height: auto;
+    }
+
+    input[type=back]{
+        margin-left: 1250px; 
+        margin-right: auto;
+        display: block;
+        background-color: #FCB346;
+        box-shadow: 0px 5px 8px 2px rgba(0, 0, 0, 0.199);
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+        font-size: 60px;
+    }
+
+    input[type=back]:hover{
+        background-color: #e89b26;
+    }
+
+    input[type=next]{
+        margin-left: auto; 
+        margin-right: 20px;
+        display: block;
+        background-color: #F47971;
+        border: #ff5e52;
+        box-shadow: 0px 5px 8px 2px rgba(0, 0, 0, 0.199);
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-align: center;
+        font-size: 60px;
+    }
+    
+    input[type=next]:hover{
+        background-color: #f05348;
+    }
+
+  </style>

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="qrValue" style="padding:5%">
+    <div v-if="qrValue">
         <div class="row">
             <div class="column">
                 <client-only>
@@ -9,9 +9,9 @@
             <div class="column">
                 <div style="align-content:center;text-align:center">
                     <div v-if="!scanned">
-                        <h1 style="padding:2%;font-size: large;">If You Scanned the QR code</h1>
-                        <h2 style="padding:2%;font-size: large;">Click the button below</h2>
-                        <input class="button" type="submit" value="Done" @click="qrScanned">
+                        <h1 style="padding:2%;font-family: 'Inter', sans-serif;font-weight: bold; font-size: large;">If you have scanned the QR code</h1>
+                        <h2 style="padding:2%;font-family: 'Inter', sans-serif;font-size: large;">Click the button below</h2>
+                        <input class="button" type="submit" value="✓ Done" @click="qrScanned">
                     </div>
                 </div>
                 <div v-if="scanned">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
     methods: {
         updateQr(form) {
             // console.log("the update QR" + form)
-            this.qrValue = form
+            this.qrValue = form;
         },
         qrScanned(){
             this.scanned = true;
@@ -62,4 +62,5 @@ export default {
         display: table;
         clear: both;
     }
+  
 </style>
