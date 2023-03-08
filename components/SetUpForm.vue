@@ -1,16 +1,16 @@
 <template >
             <form class="scene-form" @submit.prevent="onSubmitForm">
                 <div class="parameters-box">
-                    <label for="maxTimeForActivity" style="font-family: 'Inter', sans-serif; padding:70px;font-size: large;">Max Time for Activity:</label>      
+                    <label for="maxTimeForActivity" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Max Time for Activity:</label>      
                     <input id="maxTimeForActivity" v-model.number="maxTimeForActivity" type="number" min=0>
                     <br><br>
-                    <label for="numberTotalAttempts" style="font-family: 'Inter', sans-serif; padding:50px;font-size: large;">Number of Total Attempts:</label>      
+                    <label for="numberTotalAttempts" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Number of Total Attempts:</label>      
                     <input id="numberTotalAttempts" v-model.number="numberTotalAttempts" type="number" min=0 >
                     <br><br>
-                    <label for="numberRightAttempts" style="font-family: 'Inter', sans-serif; padding:49px;font-size: large;">Number of Right Attempts:</label>      
+                    <label for="numberRightAttempts" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Number of Right Attempts:</label>      
                     <input id="numberRightAttempts" v-model.number="numberRightAttempts" type="number" min=0 >
                     <br><br><br>
-                    <label for="doTutorial" style="font-family: 'Inter', sans-serif; padding: 50px;font-size: large;">Do you want to add the tutorial?</label>
+                    <label for="doTutorial" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Do you want to add the tutorial?</label>
                     <input id="doTutorial" v-model="doTutorial" type="checkbox"/>
                     <br><br><br>
                     <input class="button" type="submit" value="SUBMIT AND GENERATE QR"> 
@@ -32,8 +32,8 @@ export default {
         };
     },
     methods: {
-        addScene(scene) {
-            this.scenes.push(scene);
+        setScenes(scenes) {
+            this.scenes= scenes;
         },
         onSubmitForm() {
             if (this.maxTimeForActivity === "" || this.numberRightAttempts === ""
@@ -64,16 +64,12 @@ export default {
     @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
     
     .parameters-box {
-        width: 700px;
-        height: 500px;
-        align-content: center;
-        border: black;
-        margin-left: 25px;
-        margin-top: 10px;
+        width:100%;
+        margin-top: 5%;
     }
 
     input[type=submit]{
-        width: 35%;
+        width: fit-content;
         background-color: #f47971;
         color:black;
         padding:10px 10px;

@@ -1,7 +1,7 @@
 <template>
       <form id="scene-form" class="scene-form" @submit.prevent="onSubmit">
       <div class="activity-box">
-      <label for="name" style="font-family: 'Inter', sans-serif; padding:40px;font-size: large;">Type of activity:</label>
+      <label for="name" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Type of activity:</label>
       <select id="name" v-model="name">
         <option>Constant movement</option>
         <option>Natural movement</option>
@@ -9,21 +9,21 @@
         <option>Harmonical movement</option>
       </select>
   <br><br>
-      <label for="difficulty" style="font-family: 'Inter', sans-serif; padding:65px;font-size: large;">Difficulty:</label>
+      <label for="difficulty" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Difficulty:</label>
       <select id="difficulty" v-model="difficulty">
         <option>Difficult</option>
         <option>Medium</option>
         <option>Easy</option>
       </select>
   <br><br>
-      <label for="music" style="font-family: 'Inter', sans-serif; padding:74px;font-size: large;">Music:</label>      
+      <label for="music" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Music:</label>      
       <select id="music" v-model="music">
         <option>No music</option>
         <option>Synch music</option>
         <option>Asynch music</option>
       </select>
   <br><br>
-      <label for="rhythm" style="font-family: 'Inter', sans-serif; padding:66px;font-size: large;">Rhythm:</label>      
+      <label for="rhythm" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Rhythm:</label>      
       <select id="rhythm" v-model="rhythm">
         <option>No rhythm</option>
         <option>Synch rhythm</option>
@@ -46,12 +46,6 @@
       }
     },
     methods: {
-      addScene(scene) {
-            this.scenes.push(scene);
-      },
-      setScenes(scenes){
-        this.scenes = scenes;
-      },
       onSubmit() {
         if (this.name === null || this.music === null || this.difficulty === null
           || this.rhythm == null) {
@@ -87,12 +81,9 @@
   }
 
   .activity-box {
-    width: 800px;
-    height: 400px;
-    margin: 0px;
-    padding: 10px;
+    width: 100%;
     border: transparent;
-    text-align: center;
+    text-align: start;
   }
 
 </style>

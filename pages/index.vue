@@ -8,15 +8,15 @@
     </div> -->
     <div v-if="selectedUser">
         <header>
-            <div class="header-box">
+            <div>
                 <img class="logo" src="@/assets/LogoJupiter.png">
-                <div v-if="nextPage">
+                <div v-show="nextPage">
                     <div class="flex-container">
                         <input button class="button" type="back" value="←" @click="goToPreviousPage">
                     </div>
-                    <h1 class="title">SELECT OPTIONS AND GENERATE QR CODE</h1>
+                    <h1 class="title" >SELECT OPTIONS AND GENERATE QR CODE</h1>
                     <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
-                        <SetUpForm ref="setupform" @form-submitted ='submitForm' ></SetUpForm>
+                        <SetUpForm ref="setupform" @form-submitted ="submitForm" ></SetUpForm>
                     </div>
                     <div id="column" class="column" style="float:right;width: 50%;padding: 10px;">
                         <div class="qr-box">
@@ -24,14 +24,14 @@
                     </div></div>
                 </div>
                 
-                <div v-else>
+                <div v-show = "!nextPage">
                     <div class="flex-container">
                         <input class="button" type="next" value="→" @click="goToNextPage">
                     </div>
                     <h1 class="title">CHOOSE ACTIVITY DETAILS</h1>
                     <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
                         <div class="scene-container">
-                            <SceneForm ref="sceneform" @scene-submitted="addScene"></SceneForm>
+                            <SceneForm @scene-submitted="addScene"></SceneForm>
                         </div> 
                     </div>
                     <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
@@ -119,7 +119,7 @@ export default {
             if (this.scenes.length === 0) {
                 alert('You have to select the tasks for your activity. Please add them before going on.')
             }else{
-                this.$refs.sceneform.setScenes(this.scenes);
+                this.$refs.setupform.setScenes(this.scenes);
                 this.nextPage = true;
             }
         },
@@ -261,17 +261,14 @@ export default {
     }
 
     .scene-list-box{
-        width: 800px;
+        width: 100%;
         border: transparent;
-        margin-left: 110px;
-        margin-top: 12px;
         height: auto;
     }
 
     .qr-box{
-        width: 660px;
+        width: 100%;
         border: transparent;
-        margin-left: 65px;
         margin-top: 50px;
         height: auto;
     }
