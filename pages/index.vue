@@ -8,42 +8,45 @@
     </div> -->
     <div v-if="selectedUser">
         <header>
-            <div>
+            <div class="header-box">
                 <img class="logo" src="@/assets/LogoJupiter.png">
-                <div v-show="nextPage">
-                    <div class="flex-container">
-                        <input button class="button" type="back" value="←" @click="goToPreviousPage">
-                    </div>
-                    <h1 class="title" >SELECT OPTIONS AND GENERATE QR CODE</h1>
+                <div v-show="!nextPage" class="flex-container">
+                    <input class="button" type="next" value="→" @click="goToNextPage">
+                </div>
+                <!--div v-show="nextPage" class="flex-container">
+                    <input button class="button" type="back" value="←" @click="goToPreviousPage">
+                </div-->
+            </div>
+        </header>
+        <div v-show="nextPage">
+            <div>
+                <h1 class="title">SELECT OPTIONS AND GENERATE QR CODE</h1>
                     <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
                         <SetUpForm ref="setupform" @form-submitted ="submitForm" ></SetUpForm>
                     </div>
                     <div id="column" class="column" style="float:right;width: 50%;padding: 10px;">
                         <div class="qr-box">
-                        <QrCode ref="child" :session-token="sessionId"></QrCode>
-                    </div></div>
-                </div>
-                
-                <div v-show = "!nextPage">
-                    <div class="flex-container">
-                        <input class="button" type="next" value="→" @click="goToNextPage">
-                    </div>
-                    <h1 class="title">CHOOSE ACTIVITY DETAILS</h1>
-                    <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
-                        <div class="scene-container">
-                            <SceneForm @scene-submitted="addScene"></SceneForm>
-                        </div> 
-                    </div>
-                    <div id="column" class="column" style="float:left;width: 50%;padding: 10px;">
-                        <div class="scene-list-box">
-                            <SceneList v-if="scenes.length" :scenes="scenes"></SceneList>
+                            <QrCode ref="child" :session-token="sessionId"></QrCode>
                         </div>
                     </div>
-                </div> 
             </div>
-        </header>
+        </div>
+                
+        <div v-show = "!nextPage">
+            <h1 class="title">CHOOSE ACTIVITY DETAILS</h1>
+                <div id="column" class="column" style="float:left;width: 50%; padding: 10px;">
+                    <div class="scene-container">
+                        <SceneForm @scene-submitted="addScene"></SceneForm>
+                    </div> 
+                </div>
+                <div id="column" class="column" style="float:left; width: 50%; padding: 10px;">
+                    <div class="scene-list-box">
+                        <SceneList v-if="scenes.length" :scenes="scenes"></SceneList>
+                    </div>
+                </div>
+        </div> 
    
-        
+   
         <!-- <div class="mx-auto rounded w-max border-2 border-black px-6 py-4 mt-5">
             <p class="font-bold">User data</p>
             <p>Name: {{ selectedUser.name }}</p>
@@ -57,8 +60,7 @@
       <div class="rounded w-max mx-auto bg-red-500 border-green p-5">
         If you see this, you need to open the application from i3hub
         <a class="bg-red-200 p-1 rounded" href="https://hub.i3lab.group"
-          >https://hub.i3lab.group</a
-        >
+          >https://hub.i3lab.group</a>
       </div>
     </div>
   </div>
@@ -135,17 +137,20 @@ export default {
             for (let index = 0; index < form.scenes.length; index++) {
                 const scene = form.scenes[index];
                 switch (scene.name) {
-                    case "Constant movement":
+                    case "Elliptic trajectory constant":
                         scene.name = 5;
                         break;
-                    case "Natural movement":
+                    case "Elliptic trajectory natural":
                         scene.name = 6;
                         break;
-                    case "Eight movement":
+                    case "Eight trajectory natural":
                         scene.name = 7;
                         break;
-                    case "Harmonical movement":
+                    case "Harmonical trajectory natural":
                         scene.name = 8;
+                        break;
+                    case "Harmonical trajectory constant":
+                        scene.name = 9;
                         break;
                     default:
                 }
@@ -232,11 +237,11 @@ export default {
 
     .header-box {
         width: auto;
-        height: 170px;
-        margin: 10px;
-        padding: 25px;
+        height: 175px;
+        padding: 28px;
         border: transparent;
         background-color: rgb(222, 222, 222);
+        align-content: center;
     }
 
     .flex-container {
@@ -255,15 +260,8 @@ export default {
         background-size: cover;
         opacity: 1;
         position: absolute;
-        top: 22px;
-        left: 0px;
+        top: 2%;
         overflow: hidden;
-    }
-
-    .scene-list-box{
-        width: 100%;
-        border: transparent;
-        height: auto;
     }
 
     .qr-box{

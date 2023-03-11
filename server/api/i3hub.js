@@ -17,8 +17,8 @@ const getConfiguration = () => {
         activities: [
           {
             name: 'act1',
-            description: 'Generate QR from init parameters',
-            label: 'Generate QR',
+            description: 'Generate QR with chosen parameters',
+            label: 'Activity configuration',
             image: `${serviceHost}/img/Jgrande.png`,
             isPlaylist: false,
             isConfigurable: false,

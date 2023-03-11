@@ -1,19 +1,19 @@
-<template >
+<template>
             <form class="scene-form" @submit.prevent="onSubmitForm">
                 <div class="parameters-box">
-                    <label for="maxTimeForActivity" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Max Time for Activity:</label>      
+                    <label for="maxTimeForActivity" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Max Time for Activity (sec):</label>      
                     <input id="maxTimeForActivity" v-model.number="maxTimeForActivity" type="number" min=0>
                     <br><br>
-                    <label for="numberTotalAttempts" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Number of Total Attempts:</label>      
+                    <label for="numberTotalAttempts" style="font-family: 'Inter', sans-serif; padding:11%;font-size: large;">Number of Total Touches:</label>      
                     <input id="numberTotalAttempts" v-model.number="numberTotalAttempts" type="number" min=0 >
                     <br><br>
-                    <label for="numberRightAttempts" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Number of Right Attempts:</label>      
+                    <label for="numberRightAttempts" style="font-family: 'Inter', sans-serif; padding:11%;font-size: large;">Number of Right Touches:</label>      
                     <input id="numberRightAttempts" v-model.number="numberRightAttempts" type="number" min=0 >
                     <br><br><br>
                     <label for="doTutorial" style="font-family: 'Inter', sans-serif; padding:10%;font-size: large;">Do you want to add the tutorial?</label>
                     <input id="doTutorial" v-model="doTutorial" type="checkbox"/>
                     <br><br><br>
-                    <input class="button" type="submit" value="SUBMIT AND GENERATE QR"> 
+                    <input class="button" style="margin-left: 26%;" type="submit" value="SUBMIT AND GENERATE QR"> 
             </div>
         </form>   
 </template>
@@ -40,6 +40,9 @@ export default {
                 || this.numberTotalAttempts === "" ) { 
                 alert("The form can not have empty fields");
                 return;
+            }else if(this.numberRightAttempts > this.numberTotalAttempts){
+                alert("The number of right attempts must not be greater than the number of total attempts possible!");
+                return;
             }
             const form = {
                 patientID: this.patientID,
@@ -64,8 +67,9 @@ export default {
     @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
     
     .parameters-box {
+        flex: auto;
         width:100%;
-        margin-top: 5%;
+        margin-top: 1%;
     }
 
     input[type=submit]{
@@ -73,7 +77,7 @@ export default {
         background-color: #f47971;
         color:black;
         padding:10px 10px;
-        margin:0px 100px;
+   
         border-radius: 45px;
         cursor: pointer;
         font-family:'Inter', sans-serif; /*'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif*/
