@@ -77,7 +77,6 @@ export default {
         background-color: #f47971;
         color:black;
         padding:10px 10px;
-   
         border-radius: 45px;
         cursor: pointer;
         font-family:'Inter', sans-serif; /*'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif*/

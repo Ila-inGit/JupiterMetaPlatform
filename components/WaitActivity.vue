@@ -63,16 +63,20 @@ export default {
     input[type=download]{
         width: 40%;
         background-color: white;
-        color:#f47971;
-        padding:14px 20px;
+        color:#f86b60;
+        padding:10px 10px;
         margin:6px 0;
         border: black;
         border-radius: 4px;
         cursor: pointer;
-        font-size: 40px;
+        font-size: 16px;
+        font-family:'Inter', sans-serif;
+        font-weight: bolder;
         text-align: center;
+        width: fit-content;
     }
+
     input[type=download]:hover{
-        background-color: rgb(222, 221, 221);
+        background-color: rgb(248, 187, 187);
     }
 </style>

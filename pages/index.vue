@@ -11,7 +11,7 @@
             <div class="header-box">
                 <img class="logo" src="@/assets/LogoJupiter.png">
                 <div v-show="!nextPage" class="flex-container">
-                    <input class="button" type="next" value="→" @click="goToNextPage">
+                    <input class="arrowNext" type="submit" style="width: 90px; font-size: 200%;" value="→" @click="goToNextPage">
                 </div>
                 <!--div v-show="nextPage" class="flex-container">
                     <input button class="button" type="back" value="←" @click="goToPreviousPage">
@@ -117,16 +117,13 @@ export default {
         }
     },
     methods: {
-        goToNextPage(nextPage){
+        goToNextPage(){
             if (this.scenes.length === 0) {
                 alert('You have to select the tasks for your activity. Please add them before going on.')
             }else{
                 this.$refs.setupform.setScenes(this.scenes);
                 this.nextPage = true;
             }
-        },
-        goToPreviousPage(nextPage){
-            this.nextPage = false;
         },
         addScene(scene) {
             this.scenes.push(scene);
@@ -271,8 +268,8 @@ export default {
         height: auto;
     }
 
-    input[type=back]{
-        margin-left: 1250px; 
+    .arrowNext{
+        margin-left: 90%; 
         margin-right: auto;
         display: block;
         background-color: #FCB346;
@@ -285,27 +282,8 @@ export default {
         font-size: 60px;
     }
 
-    input[type=back]:hover{
+    .arrowNext:hover{
         background-color: #e89b26;
-    }
-
-    input[type=next]{
-        margin-left: auto; 
-        margin-right: 20px;
-        display: block;
-        background-color: #F47971;
-        border: #ff5e52;
-        box-shadow: 0px 5px 8px 2px rgba(0, 0, 0, 0.199);
-        height: 90px;
-        width: 90px;
-        border-radius: 50%;
-        cursor: pointer;
-        text-align: center;
-        font-size: 60px;
-    }
-    
-    input[type=next]:hover{
-        background-color: #f05348;
     }
 
   </style>

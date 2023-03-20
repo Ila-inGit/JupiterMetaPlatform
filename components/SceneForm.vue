@@ -53,7 +53,7 @@
           alert('New scene is incomplete. Please fill out every field.')
           return
         } else if (this.music !== 'No music' && this.rhythm !== 'No rhythm') {
-          alert('Only one between rhythm and music can be choosen at a time')
+          alert('Only one between rhythm and music can be chosen at a time')
           return
         }
        const scene = {
