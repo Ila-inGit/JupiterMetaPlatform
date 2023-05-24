@@ -1,4 +1,12 @@
-# qr-code
+# JUPITER META PLATFORM INTEGRATION
+
+## BRIEF INTRODUCTION
+The project is part of the Jupiter application project.  
+It is used as the Web App interface integrated with the I3HUB Metaplatform (https://docs.hub.i3lab.group/).
+
+The application communicate with the Jupiter back-end server deployed on Render to retreive files using the related endpoint.
+
+The application is used to customize the application session running on the HoloLens device.
 
 ## Build Setup
 
